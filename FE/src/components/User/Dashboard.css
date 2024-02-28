@@ -11,6 +11,9 @@
 .bld {
   font-weight: bold;
 }
+.site-footer a {
+  color: white !important;
+}
 .iframing {
   width: 100%;
   height: 200px;

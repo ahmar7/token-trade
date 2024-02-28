@@ -9,7 +9,7 @@ import bitmex_1 from "../../assets/img/bitmex-1.png";
 import Crypto_Logo_1 from "../../assets/img/Crypto-Logo-1.png";
 import coindesk_seeklogo from "../../assets/img/coindesk-seeklogo.com_-1.png";
 import Bitpanda_1 from "../../assets/img/Bitpanda-1.png";
-import Group_18971 from "../../assets/img/Group-18971.png";
+import Group_18971 from "../../assets/img/ef.jpg";
 import Group_211_1 from "../../assets/img/Group-211-1.png";
 import cryptoz_new_01 from "../../assets/img/cryptoz_new_01.png";
 import React from "react";
@@ -47,7 +47,7 @@ const Home = () => {
                     >
                       <div className="elementor-widget-container">
                         <a
-                          href="https://fintch.io/"
+                          href="https://tokentrade.pro/"
                           className="custom-logo-link"
                           rel="home"
                           aria-current="page"
@@ -57,7 +57,7 @@ const Home = () => {
                             height={57}
                             src={logo_300x57_1}
                             className="custom-logo"
-                            alt="Fintch.io – Future DeFi"
+                            alt="tokentrade.pro – Future DeFi"
                             decoding="async"
                           />
                         </a>
@@ -201,7 +201,7 @@ const Home = () => {
                       >
                         <div className="elementor-widget-container">
                           <h2 className="elementor-heading-title elementor-size-default">
-                            Introducing FINTCH
+                            Introducing Token Trade
                           </h2>
                         </div>
                       </div>
@@ -748,7 +748,7 @@ const Home = () => {
                                 <div className="elementor-widget-container">
                                   <link
                                     rel="stylesheet"
-                                    href="https://fintch.io/wp-content/plugins/elementor/assets/css/widget-icon-box.min.css"
+                                    href="https://tokentrade.pro/wp-content/plugins/elementor/assets/css/widget-icon-box.min.css"
                                   />
                                   <div className="elementor-icon-box-wrapper">
                                     <div className="elementor-icon-box-icon">
@@ -981,12 +981,12 @@ const Home = () => {
                         <div className="elementor-widget-container">
                           <p>
                             In the rapidly evolving landscape of decentralized
-                            finance (DeFi), FINTCH stands as a pioneering force,
-                            redefining the boundaries of innovation with its
-                            cutting-edge AI-driven platform. What sets FINTCH
-                            apart from other DeFi platforms is its unparalleled
-                            integration of Artificial Intelligence (AI)
-                            technologies, elevating the capabilities and
+                            finance (DeFi), Token Trade stands as a pioneering
+                            force, redefining the boundaries of innovation with
+                            its cutting-edge AI-driven platform. What sets Token
+                            Trade apart from other DeFi platforms is its
+                            unparalleled integration of Artificial Intelligence
+                            (AI) technologies, elevating the capabilities and
                             possibilities of blockchain-based financial
                             solutions.
                           </p>
@@ -1138,7 +1138,7 @@ const Home = () => {
                       >
                         <div className="elementor-widget-container">
                           <h2 className="elementor-heading-title elementor-size-default">
-                            FINTCH Empowers Its Users
+                            Token Trade Empowers Its Users
                           </h2>
                         </div>
                       </div>
@@ -1150,10 +1150,11 @@ const Home = () => {
                       >
                         <div className="elementor-widget-container">
                           <p>
-                            Through AI-driven analytics, FINTCH empowers users
-                            with intelligent decision-making tools, providing
-                            comprehensive risk assessment, market forecasting,
-                            and strategic investment recommendations.
+                            Through AI-driven analytics, Token Trade empowers
+                            users with intelligent decision-making tools,
+                            providing comprehensive risk assessment, market
+                            forecasting, and strategic investment
+                            recommendations.
                           </p>
                         </div>
                       </div>
@@ -1166,7 +1167,7 @@ const Home = () => {
                         <div className="elementor-widget-container">
                           <link
                             rel="stylesheet"
-                            href="https://fintch.io/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css"
+                            href="https://tokentrade.pro/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css"
                           />
                           <ul className="elementor-icon-list-items">
                             <li className="elementor-icon-list-item">
@@ -1452,7 +1453,7 @@ const Home = () => {
                               height={57}
                               src={logo_300x57_1}
                               className="custom-logo"
-                              alt="Fintch.io – Future DeFi"
+                              alt="tokentrade.pro – Future DeFi"
                               decoding="async"
                             />
                           </Link>
@@ -1467,7 +1468,7 @@ const Home = () => {
                       >
                         <div className="elementor-widget-container">
                           <p>
-                            Fintech Plus LTD
+                            Token Trade
                             <br />
                             One Churchill Place Canary Wharf, London, E14
                             <br />
@@ -1602,9 +1603,9 @@ const Home = () => {
                               </a>
                             </li>
                             <li className="elementor-icon-list-item">
-                              <a href="mailto:%20admin@fintch.io">
+                              <a href="mailto:%20admin@tokentrade.pro">
                                 <span className="elementor-icon-list-text">
-                                  admin@fintch.io
+                                  admin@tokentrade.pro
                                 </span>
                               </a>
                             </li>
@@ -1642,7 +1643,7 @@ const Home = () => {
                         data-widget_type="text-editor.default"
                       >
                         <div className="elementor-widget-container">
-                          <p>© 2023 Fintech Plus LTD</p>
+                          <p>© 2023 Token Trade</p>
                         </div>
                       </div>
                     </div>
@@ -1666,14 +1667,14 @@ const Home = () => {
                         data-element_type="widget"
                         data-widget_type="image.default"
                       >
-                        <div className="elementor-widget-container">
+                        {/* <div className="elementor-widget-container">
                           <img
-                            src="https://fintch.io/wp-content/uploads/2021/09/payment_1.png"
+                            src="https://tokentrade.pro/wp-content/uploads/2021/09/payment_1.png"
                             title
                             alt
                             loading="lazy"
                           />
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -1700,17 +1701,18 @@ const Home = () => {
                       >
                         <div className="elementor-widget-container">
                           <p>
-                            Fintech Plus Limited acknowledges the reliability of
-                            the material presented on this website; however, it
-                            does not provide assurances regarding its accuracy,
-                            timeliness, or completeness. The content is subject
-                            to change without prior notice. Some information on
-                            this page is supplied by third parties through links
-                            or other means. Fintech Plus Limited explicitly
-                            disclaims any responsibility or obligation arising
-                            from the use, interpretation, or reliance on such
-                            information and does not guarantee its accuracy,
-                            timeliness, or completeness.
+                            Token Trade Plus Limited acknowledges the
+                            reliability of the material presented on this
+                            website; however, it does not provide assurances
+                            regarding its accuracy, timeliness, or completeness.
+                            The content is subject to change without prior
+                            notice. Some information on this page is supplied by
+                            third parties through links or other means. Token
+                            Trade Plus Limited explicitly disclaims any
+                            responsibility or obligation arising from the use,
+                            interpretation, or reliance on such information and
+                            does not guarantee its accuracy, timeliness, or
+                            completeness.
                           </p>
                         </div>
                       </div>
