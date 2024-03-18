@@ -627,9 +627,9 @@ const Dashboard = () => {
                       <LineChart data={btcData} />
                     </div> */}
                     <br />
-                    <div className="line-bgasasd">
+                    {/* <div className="line-bgasasd">
                       <LiveCoins />
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="ltablet:col-span-4 col-span-12 lg:col-span-4">
