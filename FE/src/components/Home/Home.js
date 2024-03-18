@@ -188,11 +188,6 @@ const Home = () => {
                   Embark on the Future of Cryptocurrency: A Platform without
                   Financial Borders, Hidden Fees, or Fake Reviews.
                 </p>
-                <div className="features__link">
-                  <a href="#" className="button button_classic btn-modal">
-                    Learn More
-                  </a>
-                </div>
               </div>
             </div>
           </div>
@@ -239,8 +234,7 @@ const Home = () => {
         <section id="products" className="options">
           <div className="container">
             <h2 className="options__title wow animate__animated animate__fadeIn">
-              Safely Trade and Access High-Growth <br /> Cryptocurrencies in the
-              Market
+              Safely Trade and Access High-Growth <br /> Cryptocurrencies
             </h2>
             <div className="options__wrapper">
               <div className="options__item wow animate__animated animate__bounceInLeft">
@@ -252,9 +246,7 @@ const Home = () => {
                   A pioneering digital currency with a transparent record of
                   transactions.
                 </div>
-                <a href="#" className="button_circle options__item-btn">
-                  <span>&gt;</span>
-                </a>
+
                 <a
                   href="#"
                   className="button button_try options__item-btn btn-modal"
@@ -272,9 +264,7 @@ const Home = () => {
                   Utilizes blockchain technology for decentralized digital
                   applications.
                 </div>
-                <a href="#" className="button_circle options__item-btn">
-                  <span>&gt;</span>
-                </a>
+
                 <a
                   href="#"
                   className="button button_try options__item-btn btn-modal"
@@ -292,9 +282,7 @@ const Home = () => {
                   Facilitating instant payments globally. Join the Litecoin
                   community.
                 </div>
-                <a href="#" className="button_circle options__item-btn">
-                  <span>&gt;</span>
-                </a>
+
                 <a
                   href="#"
                   className="button button_try options__item-btn btn-modal"
@@ -322,12 +310,6 @@ const Home = () => {
                     Access Comprehensive Statistical Insights into Buyer and
                     Seller Behavior to Make Informed Decisions.
                   </div>
-                  <a
-                    href="#"
-                    className="button button_classic benefits__btn btn-modal wow animate__animated animate__shakeX animate__delay-1s"
-                  >
-                    Learn More
-                  </a>
                 </div>
                 <div className="benefits__graph">
                   <div className="benefits__graph-top">
@@ -378,12 +360,6 @@ const Home = () => {
                     Access Real-Time Mining Data Anywhere, Anytime, and Select
                     Your Preferred Mining Pools with Confidence.
                   </div>
-                  <a
-                    href="#"
-                    className="button button_classic benefits__btn btn-modal wow animate__animated animate__shakeX animate__delay-1s"
-                  >
-                    Learn More
-                  </a>
                 </div>
               </div>
               <div className="benefits__row">
@@ -397,12 +373,6 @@ const Home = () => {
                     Charts to Track Current and Historical Investment
                     Performance.
                   </div>
-                  <a
-                    href="#"
-                    className="button button_classic benefits__btn btn-modal wow animate__animated animate__shakeX animate__delay-1s"
-                  >
-                    Learn More
-                  </a>
                 </div>
                 <div className="benefits__table">
                   <div className="benefits__table-row benefits__table-head">
