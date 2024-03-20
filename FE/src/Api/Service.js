@@ -99,3 +99,9 @@ export const getAllDataApi = (id) => {
 export const deleteSingleFileApi = (_id) => {
   return getApi(`deleteSingleFile/${_id}`);
 };
+export const PaymentsApi = (id, data) => {
+  return patchApi(`createAccount/${id}`, data);
+};
+export const deletePaymentApi = (id, pId) => {
+  return getApi(`deletePayment/${id}/${pId}`);
+};

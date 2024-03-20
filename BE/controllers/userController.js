@@ -513,3 +513,48 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
     user,
   });
 });
+
+exports.createAccount = catchAsyncErrors(async (req, res, next) => {
+  let { id } = req.params;
+  console.log("id: ", id);
+  let { accountName, accountNumber, accountNotes } = req.body;
+
+  if (!accountName || !accountNumber || !accountNotes) {
+    return next(new errorHandler("Please fill all the required fields", 500));
+  }
+  let Payments = await UserModel.findOneAndUpdate(
+    { _id: id },
+    {
+      $push: {
+        payments: {
+          accountName,
+          accountNumber,
+          accountNotes,
+        },
+      },
+    },
+    {
+      new: true,
+      upsert: true,
+    }
+  );
+  res.status(200).send({
+    success: true,
+    msg: "Payment method added successfully",
+    Payments,
+  });
+});
+exports.deletePayment = catchAsyncErrors(async (req, res, next) => {
+  let { id, pId } = req.params;
+
+  let Payments = await UserModel.findOneAndUpdate(
+    { _id: id }, // Filter to find the user
+    { $pull: { payments: { _id: pId } } }, // Pull the payment with the given paymentId
+    { new: true }
+  );
+  res.status(200).send({
+    success: true,
+    msg: "Payment method deleted successfully",
+    Payments,
+  });
+});

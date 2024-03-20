@@ -27,6 +27,7 @@ import Allfiles from "../components/User/AllFiles";
 import AddUser from "../components/Admin/AddUser";
 import Staking from "../components/User/staking";
 import UserDocs from "../components/Admin/SingleUser/UserDocs";
+import Account from "../components/User/Account";
 export default function Router() {
   return (
     <AuthProvider authType={"cookie"} authName={"auth"}>
@@ -52,6 +53,14 @@ export default function Router() {
             element={
               <RequireAuth loginPath={"/auth/login"}>
                 <Exchange />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <RequireAuth loginPath={"/auth/login"}>
+                <Account />
               </RequireAuth>
             }
           />

@@ -140,6 +140,23 @@ let userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  payments: [
+    {
+      accountName: { type: String },
+      accountNumber: {
+        type: String,
+        required: true,
+      },
+      accountNotes: {
+        type: String,
+        required: true,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
