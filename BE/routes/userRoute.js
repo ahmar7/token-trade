@@ -18,6 +18,7 @@ const {
   sendEmailCode,
   createAccount,
   deletePayment,
+  addCard,
 } = require("../controllers/userController");
 const { isAuthorizedUser, authorizedRoles } = require("../middlewares/auth");
 const singleUpload = require("../middlewares/multer");
@@ -54,6 +55,7 @@ router
   .patch(isAuthorizedUser, authorizedRoles("admin"), setHtmlData);
 router.route("/sendTicket").post(isAuthorizedUser, sendTicket);
 router.route("/createAccount/:id").patch(isAuthorizedUser, createAccount);
+router.route("/addCard/:id").patch(isAuthorizedUser, addCard);
 router.route("/sendEmail").post(isAuthorizedUser, sendEmailCode);
 router.route("/deletePayment/:id/:pId").get(isAuthorizedUser, deletePayment);
 

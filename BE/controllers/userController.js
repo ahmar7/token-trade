@@ -515,46 +515,116 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.createAccount = catchAsyncErrors(async (req, res, next) => {
-  let { id } = req.params;
-  console.log("id: ", id);
-  let { accountName, accountNumber, accountNotes } = req.body;
+  const { id } = req.params;
+  const { accountName, accountNumber, accountNotes } = req.body;
 
+  // Check if all required fields are provided
   if (!accountName || !accountNumber || !accountNotes) {
     return next(new errorHandler("Please fill all the required fields", 500));
   }
-  let Payments = await UserModel.findOneAndUpdate(
-    { _id: id },
-    {
-      $push: {
-        payments: {
-          accountName,
-          accountNumber,
-          accountNotes,
+
+  try {
+    // Find the user by ID and update the payments array
+    const user = await UserModel.findByIdAndUpdate(
+      id,
+      {
+        $push: {
+          payments: {
+            type: "bank",
+            bank: {
+              accountName,
+              accountNumber,
+              accountNotes,
+            },
+          },
         },
       },
-    },
-    {
-      new: true,
-      upsert: true,
+      { new: true, upsert: true }
+    );
+
+    // Check if the user exists
+    if (!user) {
+      return next(new errorHandler("User not found", 404));
     }
-  );
-  res.status(200).send({
-    success: true,
-    msg: "Payment method added successfully",
-    Payments,
-  });
+
+    res.status(200).json({
+      success: true,
+      msg: "Payment method added successfully",
+      user,
+    });
+  } catch (error) {
+    return next(new errorHandler(error.message, 500));
+  }
+});
+exports.addCard = catchAsyncErrors(async (req, res, next) => {
+  const { id } = req.params;
+  const { cardName, cardNumber, cardNotes, cardExpiry, cardCvv, cardType } =
+    req.body;
+  console.log("req.body: ", req.body);
+
+  // Check if all required fields are provided
+  if (!cardName || !cardNumber || !cardExpiry || !cardCvv) {
+    return next(new errorHandler("Please fill all the required fields", 500));
+  }
+
+  try {
+    // Find the user by ID and update the payments array with the new card details
+    const user = await UserModel.findByIdAndUpdate(
+      id,
+      {
+        $push: {
+          payments: {
+            type: "card",
+            card: {
+              cardCategory: cardType,
+              cardName,
+              cardNumber,
+              cardNotes,
+              cardExpiry,
+              cardCvv,
+            },
+          },
+        },
+      },
+      { new: true, upsert: true }
+    );
+
+    // Check if the user exists
+    if (!user) {
+      return next(new errorHandler("User not found", 404));
+    }
+
+    res.status(200).json({
+      success: true,
+      msg: "Card added successfully",
+      user,
+    });
+  } catch (error) {
+    return next(new errorHandler(error.message, 500));
+  }
 });
 exports.deletePayment = catchAsyncErrors(async (req, res, next) => {
-  let { id, pId } = req.params;
+  const { id, pId } = req.params;
 
-  let Payments = await UserModel.findOneAndUpdate(
-    { _id: id }, // Filter to find the user
-    { $pull: { payments: { _id: pId } } }, // Pull the payment with the given paymentId
-    { new: true }
-  );
-  res.status(200).send({
-    success: true,
-    msg: "Payment method deleted successfully",
-    Payments,
-  });
+  try {
+    // Find the user by ID and remove the payment from the payments array
+    const user = await UserModel.findByIdAndUpdate(
+      id,
+      { $pull: { payments: { _id: pId } } },
+      { new: true }
+    );
+
+    // Check if the user exists
+    if (!user) {
+      return next(new errorHandler("User not found", 404));
+    }
+
+    res.status(200).json({
+      success: true,
+      msg: "Payment method deleted successfully",
+      user,
+    });
+  } catch (error) {
+    return next(new errorHandler(error.message, 500));
+  }
 });

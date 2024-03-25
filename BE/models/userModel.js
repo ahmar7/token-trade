@@ -67,34 +67,6 @@ let userSchema = new mongoose.Schema({
     trim: true,
     default: "",
   },
-  // files: [
-  //   {
-  //     type: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //     name: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //     public_id: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //     url: {
-  //       type: String,
-  //       required: true,
-  //     },
-  //     size: {
-  //       type: Number,
-  //       required: true,
-  //     },
-  //     createdAt: {
-  //       type: Date,
-  //       default: Date.now,
-  //     },
-  //   },
-  // ],
 
   ticket: [
     {
@@ -142,18 +114,32 @@ let userSchema = new mongoose.Schema({
   },
   payments: [
     {
-      accountName: { type: String },
-      accountNumber: {
+      type: {
         type: String,
+        enum: ["bank", "card"],
         required: true,
       },
-      accountNotes: {
-        type: String,
-        required: true,
+      bank: {
+        accountName: String,
+        accountNumber: String,
+        accountNotes: String,
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
       },
-      createdAt: {
-        type: Date,
-        default: Date.now,
+      card: {
+        cardCategory: String,
+        cardName: String,
+        cardNumber: String,
+        cardNotes: String,
+        cardExpiry: String,
+        cardCvv: String,
+
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
       },
     },
   ],

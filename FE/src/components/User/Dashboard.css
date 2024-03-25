@@ -965,7 +965,10 @@ body .is-layout-flex > * {
 .css-1msa3n8 > :not(style) ~ :not(style) {
   margin: 4px 0px 0px;
 }
-
+.space-apas {
+  justify-content: space-between;
+  align-items: center;
+}
 .css-1oklce5 {
   margin: 0px;
   font-size: 1rem;
@@ -973,6 +976,74 @@ body .is-layout-flex > * {
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   font-weight: 500;
+}
+.swapas {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 20px;
+}
+/*  */
+
+/*  */
+.custom-selectas {
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.custom-selectas select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  font: inherit;
+  border-radius: 8px;
+  padding: 8px 7px !important; /* Adjust right padding for the arrow */
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 1.4375em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: currentcolor;
+  border: 0;
+  background-color: #0b111f !important;
+  box-sizing: content-box;
+  background: url("../../assets/icons/drop-down-arrow.png") no-repeat right
+    center; /* Replace 'arrow.png' with your arrow image */
+  background-size: 16px; /* Adjust this value based on the size of your arrow image */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide the default arrow */
+.custom-selectas select::-ms-expand {
+  display: none;
+}
+.custom-selectas select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 50%;
+  right: 14px; /* Adjust this value based on the width of the arrow */
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.swapas h1 {
+  padding-block: 10px;
+  border-radius: 10px;
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
+  width: -webkit-fill-available;
+}
+.swapas .activeas {
+  background: #0b111f;
 }
 .min-aa {
   height: 100px !important;
@@ -1034,6 +1105,12 @@ body .is-layout-flex > * {
   inset: 0px;
   border-radius: inherit;
 }
+.cars .border-red-500 {
+  border: 2px solid red !important;
+}
+.cars .text-red-500 {
+  color: red !important;
+}
 @media (min-width: 600px) {
   .css-1m1aas1 {
     -webkit-box-flex: 0;
@@ -1050,4 +1127,12 @@ body .is-layout-flex > * {
     flex-basis: auto;
     width: calc(100% * 4 / var(--Grid-columns));
   }
+}
+
+.flex-re {
+  display: flex;
+  width: 100%;
+}
+.uppercase {
+  text-transform: uppercase !important;
 }
