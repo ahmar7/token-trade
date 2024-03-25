@@ -1024,7 +1024,7 @@ const Transactions = () => {
                         ) : (
                           ""
                         )}
-                        {singleTransaction.withdraw === "bank" ? (
+                        {singleTransaction.withdraw === "crypto" ? (
                           <div className="sm:col-span-1">
                             <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">
                               to

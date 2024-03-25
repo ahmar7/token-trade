@@ -28,6 +28,8 @@ const PendingTransactions = () => {
     txId: "",
     fromAddress: "",
     note: "",
+    withdraw: "",
+    selectedPayment: "",
     createdAt: null,
     trxName: "",
   });
@@ -73,7 +75,7 @@ const PendingTransactions = () => {
         // setData(filter)
         let val = response.data.bpi.USD.rate.replace(/,/g, "");
         setliveBtc(val);
-        console.log("allTransactions: ", allTransactions);
+        console.log("allTransactions:as ", allTransactions.Transaction);
         setUserTransactions(allTransactions.Transaction.reverse());
 
         // setUserTransactions(pendingTransactionsLengthArray);
@@ -97,6 +99,8 @@ const PendingTransactions = () => {
     setStatus(data.status);
     setType(data.type);
     setsingleTransaction({
+      selectedPayment: data.selectedPayment,
+      withdraw: data.withdraw,
       amount: data.amount,
       txId: data.txId,
       fromAddress: data.fromAddress,
@@ -145,6 +149,8 @@ const PendingTransactions = () => {
     let amount = txid.amount;
     let _id = txid._id;
     let txId = txid.txId;
+    let withdraw = txid.withdraw;
+    let selectedPayment = txid.selectedPayment;
     let trxName = txid.trxName;
     let note = txid.note;
     let fromAddress = txid.fromAddress;
@@ -167,7 +173,18 @@ const PendingTransactions = () => {
       return;
     }
 
-    let body = { amount, txId, trxName, _id, note, type, fromAddress, status };
+    let body = {
+      withdraw,
+      selectedPayment,
+      amount,
+      txId,
+      trxName,
+      _id,
+      note,
+      type,
+      fromAddress,
+      status,
+    };
 
     try {
       setisDisbaled(true);

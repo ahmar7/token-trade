@@ -52,6 +52,7 @@ const Account = () => {
       setisLoading(false);
     }
   };
+
   const deletePayment = async (pId) => {
     try {
       setisDisable1(true);
