@@ -1,4 +1,4 @@
-import logo from "../../assets/img/logo.svg";
+import logo from "../../assets/img/Logo.png";
 import menu_btn_1 from "../../assets/icons/menu_btn_1.png";
 import close_2 from "../../assets/icons/close_2.png";
 import "./style.css";
