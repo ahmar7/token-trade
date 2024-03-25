@@ -120,11 +120,12 @@ exports.createTransaction = catchAsyncErrors(async (req, res, next) => {
 });
 exports.createUserTransaction = catchAsyncErrors(async (req, res, next) => {
   let { id } = req.params;
-  let { trxName, amount, txId } = req.body;
+  let { trxName, amount, txId, selectedPayment, e } = req.body;
+  console.log("req.body: ", req.body);
   let status = "pending";
   let type = "withdraw";
   let by = "user";
-  if (!trxName || !amount || !txId) {
+  if (!trxName || !amount) {
     return next(new errorHandler("Please fill all the required fields", 500));
   }
   let Transaction = await userCoins.findOneAndUpdate(
@@ -132,6 +133,8 @@ exports.createUserTransaction = catchAsyncErrors(async (req, res, next) => {
     {
       $push: {
         transactions: {
+          withdraw: e,
+          selectedPayment: selectedPayment,
           trxName,
           amount,
           txId,

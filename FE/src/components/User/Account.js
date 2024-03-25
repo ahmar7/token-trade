@@ -292,7 +292,7 @@ const Account = () => {
   };
 
   return (
-    <div className="dark user-bg">
+    <div className="dark user-bg adasd">
       <div>
         <div className="pb-20">
           <SideBar state={Active} toggle={toggleBar} />{" "}

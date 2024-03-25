@@ -994,6 +994,7 @@ body .is-layout-flex > * {
 }
 
 .custom-selectas select {
+  color: white !important;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -1011,7 +1012,6 @@ body .is-layout-flex > * {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  color: currentcolor;
   border: 0;
   background-color: #0b111f !important;
   box-sizing: content-box;

@@ -3,6 +3,7 @@ import SideBar from "../../layout/UserSidebar/SideBar";
 import Log from "../../assets/img/log.jpg";
 import {
   createUserTransactionApi,
+  createUserTransactionMethodApi,
   getCoinsUserApi,
   getsignUserApi,
 } from "../../Api/Service";
@@ -152,6 +153,19 @@ const Assets = () => {
     }
   };
   //
+  const [selectedPayment, setSelectedPayment] = useState(null); // State to store the selected payment method
+
+  // Function to handle selection change in the dropdown menu
+  const handlePaymentSelection = (event) => {
+    const selectedValue = event.target.value;
+    console.log("selectedValue: ", selectedValue);
+    if (selectedValue === "Select a Payment Method") {
+      setSelectedPayment(null); // Set selected payment to null if the first option is selected
+    } else {
+      setSelectedPayment(selectedValue); // Otherwise, update the selected payment state with the value of the selected option
+    }
+  };
+
   const [copySuccess, setCopySuccess] = useState(false);
 
   const handleCopyClick = () => {
@@ -285,7 +299,9 @@ const Assets = () => {
     setModal3(false);
   };
 
-  const postUserTransaction = async () => {
+  const postUserTransaction = async (e) => {
+    console.log("Value of e:", e);
+
     try {
       let id = authUser().user._id;
       setisDisable(true);
@@ -301,21 +317,44 @@ const Assets = () => {
         );
         return;
       }
-
-      let body = {
-        trxName: depositName,
-        amount: -transactionDetail.amountMinus,
-        txId: transactionDetailId.txId,
-      };
-
-      if (!body.trxName || !body.amount || !body.txId) {
-        toast.dismiss();
-        toast.error("Fill all the required fields");
-        return;
+      let body;
+      if (e == "crypto") {
+        body = {
+          trxName: depositName,
+          amount: -transactionDetail.amountMinus,
+          txId: transactionDetailId.txId,
+          e: e,
+        };
+        if (!body.trxName || !body.amount || !body.txId) {
+          console.log("body.amount: ", body.amount);
+          console.log("body.trxName: ", body.trxName);
+          toast.dismiss();
+          toast.error("Fill all the required fields");
+          return;
+        }
+      } else if (e == "bank") {
+        body = {
+          trxName: depositName,
+          amount: -transactionDetail.amountMinus,
+          selectedPayment: selectedPayment,
+          e: e,
+        };
+        if (!body.trxName || !body.amount) {
+          toast.dismiss();
+          toast.error("Fill all the required fields");
+          return;
+        }
+        if (selectedPayment === null) {
+          toast.dismiss();
+          toast.error("Please select a Payment Method");
+          return;
+        }
       }
+
       const newTransaction = await createUserTransactionApi(id, body);
 
       if (newTransaction.success) {
+        setSelectedPayment(null);
         toast.dismiss();
         toast.success(newTransaction.msg);
 
@@ -331,6 +370,7 @@ const Assets = () => {
       setisDisable(false);
     }
   };
+
   const [activeBank, setactiveBank] = useState(false);
   let activeCrypto = () => {
     setactiveBank(false);
@@ -338,6 +378,7 @@ const Assets = () => {
   let activeBankOne = () => {
     setactiveBank(true);
   };
+
   return (
     <div className="dark user-bg">
       <div>
@@ -1033,7 +1074,11 @@ const Assets = () => {
                               </div>
                             </div>
                             <div class="custom-selectas">
-                              <select id="select-options">
+                              <select
+                                id="select-options"
+                                onChange={handlePaymentSelection}
+                              >
+                                <option>Select a Payment Method</option>
                                 {isUser.payments.map((item, index) => {
                                   return (
                                     <option key={index}>
@@ -1171,10 +1216,24 @@ const Assets = () => {
                           Cancel
                         </button>
                         {activeBank ? (
-                          ""
+                          <button
+                            onClick={() => postUserTransaction("bank")}
+                            data-v-71bb21a6
+                            disabled={isDisable}
+                            type="button"
+                            className="is-button rounded bg-primary-500 dark:bg-primary-500 hover:enabled:bg-primary-400 dark:hover:enabled:bg-primary-400 text-white hover:enabled:shadow-lg hover:enabled:shadow-primary-500/50 dark:hover:enabled:shadow-primary-800/20 focus-visible:outline-primary-400/70 focus-within:outline-primary-400/70 focus-visible:bg-primary-500 active:enabled:bg-primary-500 dark:focus-visible:outline-primary-400 dark:focus-within:outline-primary-400 dark:focus-visible:bg-primary-500 dark:active:enabled:bg-primary-500"
+                          >
+                            {isDisable ? (
+                              <div>
+                                <div className="nui-placeload animate-nui-placeload h-4 w-8 rounded mx-auto"></div>
+                              </div>
+                            ) : (
+                              "Create"
+                            )}
+                          </button>
                         ) : (
                           <button
-                            onClick={postUserTransaction}
+                            onClick={() => postUserTransaction("crypto")}
                             data-v-71bb21a6
                             disabled={isDisable}
                             type="button"

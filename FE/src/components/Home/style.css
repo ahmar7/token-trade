@@ -3202,7 +3202,6 @@
 }
 html {
   box-sizing: border-box;
-  color: #fff;
   background: #0d0d2b;
 }
 body {
@@ -3215,6 +3214,39 @@ body {
 }
 a {
   text-decoration: none;
+}
+.dark select,
+.dark option {
+  color: white;
+}
+.mainea p,
+.mainea h1,
+.mainea h2,
+.mainea h3,
+.mainea h4,
+.mainea h5,
+.mainea h6,
+.mainea .text,
+.mainea span,
+.dark p,
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6,
+.dark .text,
+.dark span,
+.adasd p,
+.adasd h1,
+.adasd h2,
+.adasd h3,
+.adasd h4,
+.adasd h5,
+.adasd h6,
+.adasd .text,
+.adasd span {
+  color: white;
 }
 .mainea .container {
   position: relative;
