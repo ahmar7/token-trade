@@ -224,6 +224,7 @@ const Dashboard = () => {
   useEffect(() => {
     getAllUsers();
     getTransactions();
+    console.log("authUser: ", authUser().user.role);
     if (authUser().user.role === "user") {
       Navigate("/dashboard");
       return;

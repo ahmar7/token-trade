@@ -18,28 +18,20 @@ const {
 
 let router = express.Router();
 
-router.route("/addCoins/:id").patch(authorizedRoles("admin"), addCoins);
-router
-  .route("/updateCoinAddress/:id")
-  .patch(authorizedRoles("admin"), updateCoinAddress);
-router.route("/getCoins/:id").get(authorizedRoles("admin"), getCoins);
+router.route("/addCoins/:id").patch(addCoins);
+router.route("/updateCoinAddress/:id").patch(updateCoinAddress);
+router.route("/getCoins/:id").get(getCoins);
 router.route("/getUserCoin/:id").get(getUserCoin);
 
 router.route("/getCoinsUser/:id").get(getCoinsUser);
 router
   .route("/deleteTransaction/:userId/:transactionId")
-  .get(authorizedRoles("admin"), deleteTransaction);
-router
-  .route("/createTransaction/:id")
-  .patch(authorizedRoles("admin"), createTransaction);
+  .get(deleteTransaction);
+router.route("/createTransaction/:id").patch(createTransaction);
 router.route("/createUserTransaction/:id").patch(createUserTransaction);
-router
-  .route("/updateTransaction/:id")
-  .patch(authorizedRoles("admin"), updateTransaction);
-router.route("/getTransactions").get(authorizedRoles("admin"), getTransactions);
-router.route("/getEachUser/:id").get(authorizedRoles("admin"), getEachUser);
-router
-  .route("/deleteEachUser/:id")
-  .delete(authorizedRoles("admin"), deleteEachUser);
+router.route("/updateTransaction/:id").patch(updateTransaction);
+router.route("/getTransactions").get(getTransactions);
+router.route("/getEachUser/:id").get(getEachUser);
+router.route("/deleteEachUser/:id").delete(deleteEachUser);
 
 module.exports = router;
