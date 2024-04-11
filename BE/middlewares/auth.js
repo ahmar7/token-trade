@@ -4,7 +4,7 @@ const ErrorHandler = require("../utils/errorHandler");
 const User = require("../models/userModel");
 
 exports.isAuthorizedUser = catchAsyncErrors(async (req, res, next) => {
-  const { jwttoken } = await req.cookies;
+  const jwttoken = localStorage.getItem("token");
   if (!jwttoken) {
     return next(new ErrorHandler("Please login to access this resource", 401));
   }

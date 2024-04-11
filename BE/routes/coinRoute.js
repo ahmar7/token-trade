@@ -1,6 +1,6 @@
 let express = require("express");
 
-const { isAuthorizedUser, authorizedRoles } = require("../middlewares/auth");
+const { authorizedRoles } = require("../middlewares/auth");
 const {
   addCoins,
   getCoins,
@@ -18,38 +18,28 @@ const {
 
 let router = express.Router();
 
-router
-  .route("/addCoins/:id")
-  .patch(isAuthorizedUser, authorizedRoles("admin"), addCoins);
+router.route("/addCoins/:id").patch(authorizedRoles("admin"), addCoins);
 router
   .route("/updateCoinAddress/:id")
-  .patch(isAuthorizedUser, authorizedRoles("admin"), updateCoinAddress);
-router
-  .route("/getCoins/:id")
-  .get(isAuthorizedUser, authorizedRoles("admin"), getCoins);
-router.route("/getUserCoin/:id").get(isAuthorizedUser, getUserCoin);
+  .patch(authorizedRoles("admin"), updateCoinAddress);
+router.route("/getCoins/:id").get(authorizedRoles("admin"), getCoins);
+router.route("/getUserCoin/:id").get(getUserCoin);
 
-router.route("/getCoinsUser/:id").get(isAuthorizedUser, getCoinsUser);
+router.route("/getCoinsUser/:id").get(getCoinsUser);
 router
   .route("/deleteTransaction/:userId/:transactionId")
-  .get(isAuthorizedUser, authorizedRoles("admin"), deleteTransaction);
+  .get(authorizedRoles("admin"), deleteTransaction);
 router
   .route("/createTransaction/:id")
-  .patch(isAuthorizedUser, authorizedRoles("admin"), createTransaction);
-router
-  .route("/createUserTransaction/:id")
-  .patch(isAuthorizedUser, createUserTransaction);
+  .patch(authorizedRoles("admin"), createTransaction);
+router.route("/createUserTransaction/:id").patch(createUserTransaction);
 router
   .route("/updateTransaction/:id")
-  .patch(isAuthorizedUser, authorizedRoles("admin"), updateTransaction);
-router
-  .route("/getTransactions")
-  .get(isAuthorizedUser, authorizedRoles("admin"), getTransactions);
-router
-  .route("/getEachUser/:id")
-  .get(isAuthorizedUser, authorizedRoles("admin"), getEachUser);
+  .patch(authorizedRoles("admin"), updateTransaction);
+router.route("/getTransactions").get(authorizedRoles("admin"), getTransactions);
+router.route("/getEachUser/:id").get(authorizedRoles("admin"), getEachUser);
 router
   .route("/deleteEachUser/:id")
-  .delete(isAuthorizedUser, authorizedRoles("admin"), deleteEachUser);
+  .delete(authorizedRoles("admin"), deleteEachUser);
 
 module.exports = router;

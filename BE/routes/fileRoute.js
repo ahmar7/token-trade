@@ -1,6 +1,6 @@
 let express = require("express");
 
-const { isAuthorizedUser, authorizedRoles } = require("../middlewares/auth");
+const { authorizedRoles } = require("../middlewares/auth");
 const {
   uploadFiles,
   getAllData,
@@ -12,10 +12,10 @@ let router = express.Router();
 
 router
   .route("/uploadFiles/:id")
-  .post(singleUpload, isAuthorizedUser, authorizedRoles("admin"), uploadFiles);
-router.route("/getAllData/:id").get(isAuthorizedUser, getAllData);
+  .post(singleUpload, authorizedRoles("admin"), uploadFiles);
+router.route("/getAllData/:id").get(getAllData);
 router
   .route("/deleteSingleFile/:_id")
-  .get(isAuthorizedUser, authorizedRoles("admin"), deleteSingleFile);
+  .get(authorizedRoles("admin"), deleteSingleFile);
 
 module.exports = router;

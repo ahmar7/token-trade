@@ -17,4 +17,5 @@ const jwtToken = (user, statusCode, res) => {
     user,
   });
 };
+
 module.exports = jwtToken;

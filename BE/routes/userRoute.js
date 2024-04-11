@@ -20,7 +20,7 @@ const {
   deletePayment,
   addCard,
 } = require("../controllers/userController");
-const { isAuthorizedUser, authorizedRoles } = require("../middlewares/auth");
+const { authorizedRoles } = require("../middlewares/auth");
 const singleUpload = require("../middlewares/multer");
 
 let router = express.Router();
@@ -28,35 +28,25 @@ let router = express.Router();
 router.route("/register").post(RegisterUser);
 router.route("/login").post(loginUser);
 router.route("/logout").get(logoutUser);
-router
-  .route("/allUser")
-  .get(isAuthorizedUser, authorizedRoles("admin"), allUser);
-router
-  .route("/singleUser/:id")
-  .get(isAuthorizedUser, authorizedRoles("admin"), singleUser);
+router.route("/allUser").get(authorizedRoles("admin"), allUser);
+router.route("/singleUser/:id").get(authorizedRoles("admin"), singleUser);
 router
   .route("/updateSingleUser/:id")
-  .post(isAuthorizedUser, authorizedRoles("admin"), updateSingleUser);
+  .post(authorizedRoles("admin"), updateSingleUser);
 router
   .route("/bypassSingleUser/:id")
-  .patch(isAuthorizedUser, authorizedRoles("admin"), bypassSingleUser);
-router
-  .route("/verifySingleUser")
-  .patch(isAuthorizedUser, singleUpload, verifySingleUser);
-router.route("/getHtmlData").get(isAuthorizedUser, getHtmlData);
+  .patch(authorizedRoles("admin"), bypassSingleUser);
+router.route("/verifySingleUser").patch(singleUpload, verifySingleUser);
+router.route("/getHtmlData").get(getHtmlData);
 router.route("/password/reset").post(resetPassword);
-router.route("/getsignUser").patch(isAuthorizedUser, singleUpload, getsignUser);
+router.route("/getsignUser").patch(singleUpload, getsignUser);
 router.route("/:id/verify/:token").get(verifyToken);
-router
-  .route("/updateKyc/:id")
-  .patch(isAuthorizedUser, authorizedRoles("admin"), updateKyc);
-router
-  .route("/setHtmlData")
-  .patch(isAuthorizedUser, authorizedRoles("admin"), setHtmlData);
-router.route("/sendTicket").post(isAuthorizedUser, sendTicket);
-router.route("/createAccount/:id").patch(isAuthorizedUser, createAccount);
-router.route("/addCard/:id").patch(isAuthorizedUser, addCard);
-router.route("/sendEmail").post(isAuthorizedUser, sendEmailCode);
-router.route("/deletePayment/:id/:pId").get(isAuthorizedUser, deletePayment);
+router.route("/updateKyc/:id").patch(authorizedRoles("admin"), updateKyc);
+router.route("/setHtmlData").patch(authorizedRoles("admin"), setHtmlData);
+router.route("/sendTicket").post(sendTicket);
+router.route("/createAccount/:id").patch(createAccount);
+router.route("/addCard/:id").patch(addCard);
+router.route("/sendEmail").post(sendEmailCode);
+router.route("/deletePayment/:id/:pId").get(deletePayment);
 
 module.exports = router;
