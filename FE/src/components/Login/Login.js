@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import { loginApi } from "../../Api/Service";
 import MobileApp from "../../assets/img/app-fold-phone.png";
 import { useSignIn, useIsAuthenticated, useAuthUser } from "react-auth-kit";
+import { useAuth } from "../../store/auth";
+
 const Login = () => {
   const [isloading, setisloading] = useState(false);
   const signIn = useSignIn();
@@ -23,6 +25,8 @@ const Login = () => {
       ? settype1("password")
       : settype1("password");
   };
+
+  const { storeTokenInLs } = useAuth();
   const logIn = async (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -67,6 +71,7 @@ const Login = () => {
           sameSite: false,
         })
       ) {
+        storeTokenInLs(updateHeader.token);
         toast.dismiss();
         toast.success(updateHeader.msg);
         if (updateHeader.user.role === "user") {
@@ -83,8 +88,6 @@ const Login = () => {
         setPassword("");
       }
     } catch (error) {
-      setEmail("");
-      setPassword("");
       toast.dismiss();
       toast.error(error?.data?.msg || "Something went wrong");
     } finally {

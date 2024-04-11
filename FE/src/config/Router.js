@@ -28,9 +28,10 @@ import AddUser from "../components/Admin/AddUser";
 import Staking from "../components/User/staking";
 import UserDocs from "../components/Admin/SingleUser/UserDocs";
 import Account from "../components/User/Account";
+import Swap from "../components/User/Swap";
 export default function Router() {
   return (
-    <AuthProvider authType={"cookie"} authName={"auth"}>
+    <AuthProvider authType={"localstorage"} authName={"auth"}>
       <BrowserRouter>
         <Top />
         <Routes>
@@ -61,6 +62,14 @@ export default function Router() {
             element={
               <RequireAuth loginPath={"/auth/login"}>
                 <Account />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/swap"
+            element={
+              <RequireAuth loginPath={"/auth/login"}>
+                <Swap />
               </RequireAuth>
             }
           />
