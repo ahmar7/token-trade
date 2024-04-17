@@ -6,6 +6,7 @@ import { useAuthUser } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
 import UserHeader from "./UserHeader";
 import "./style.css";
+import axios from "axios";
 const Swap = () => {
   const [Active, setActive] = useState(false);
   let toggleBar = () => {
@@ -39,102 +40,102 @@ const Swap = () => {
   const [liveBtc, setliveBtc] = useState(null);
   const [btcBalance, setbtcBalance] = useState(0);
 
-  const getCoins = async (data) => {
-    let id = data._id;
-    try {
-      const response = await axios.get(
-        "https://api.coindesk.com/v1/bpi/currentprice.json"
-      );
-      const userCoins = await getCoinsUserApi(id);
+  // const getCoins = async (data) => {
+  //   let id = data._id;
+  //   try {
+  //     const response = await axios.get(
+  //       "https://api.coindesk.com/v1/bpi/currentprice.json"
+  //     );
+  //     const userCoins = await getCoinsUserApi(id);
 
-      if (response && userCoins.success) {
-        setUserData(userCoins.getCoin);
-        // setUserTransactions;
-        let val = response.data.bpi.USD.rate.replace(/,/g, "");
-        console.log("val: ", val);
-        setliveBtc(val);
-        setisLoading(false);
-        // tx
-        const btc = userCoins.getCoin.transactions.filter((transaction) =>
-          transaction.trxName.includes("bitcoin")
-        );
-        const btccomplete = btc.filter((transaction) =>
-          transaction.status.includes("completed")
-        );
-        let btcCount = 0;
-        let btcValueAdded = 0;
-        for (let i = 0; i < btccomplete.length; i++) {
-          const element = btccomplete[i];
-          btcCount = element.amount;
-          btcValueAdded += btcCount;
-        }
-        setbtcBalance(btcValueAdded);
-        // tx
-        // tx
-        const eth = userCoins.getCoin.transactions.filter((transaction) =>
-          transaction.trxName.includes("ethereum")
-        );
-        const ethcomplete = eth.filter((transaction) =>
-          transaction.status.includes("completed")
-        );
-        let ethCount = 0;
-        let ethValueAdded = 0;
-        for (let i = 0; i < ethcomplete.length; i++) {
-          const element = ethcomplete[i];
-          ethCount = element.amount;
-          ethValueAdded += ethCount;
-        }
-        setethBalance(ethValueAdded);
-        // tx
-        // tx
-        const usdt = userCoins.getCoin.transactions.filter((transaction) =>
-          transaction.trxName.includes("tether")
-        );
-        const usdtcomplete = usdt.filter((transaction) =>
-          transaction.status.includes("completed")
-        );
-        let usdtCount = 0;
-        let usdtValueAdded = 0;
-        for (let i = 0; i < usdtcomplete.length; i++) {
-          const element = usdtcomplete[i];
-          usdtCount = element.amount;
-          usdtValueAdded += usdtCount;
-        }
-        setusdtBalance(usdtValueAdded);
-        // tx
+  //     if (response && userCoins.success) {
+  //       setUserData(userCoins.getCoin);
+  //       // setUserTransactions;
+  //       let val = response.data.bpi.USD.rate.replace(/,/g, "");
+  //       console.log("val: ", val);
+  //       setliveBtc(val);
+  //       setisLoading(false);
+  //       // tx
+  //       const btc = userCoins.getCoin.transactions.filter((transaction) =>
+  //         transaction.trxName.includes("bitcoin")
+  //       );
+  //       const btccomplete = btc.filter((transaction) =>
+  //         transaction.status.includes("completed")
+  //       );
+  //       let btcCount = 0;
+  //       let btcValueAdded = 0;
+  //       for (let i = 0; i < btccomplete.length; i++) {
+  //         const element = btccomplete[i];
+  //         btcCount = element.amount;
+  //         btcValueAdded += btcCount;
+  //       }
+  //       setbtcBalance(btcValueAdded);
+  //       // tx
+  //       // tx
+  //       const eth = userCoins.getCoin.transactions.filter((transaction) =>
+  //         transaction.trxName.includes("ethereum")
+  //       );
+  //       const ethcomplete = eth.filter((transaction) =>
+  //         transaction.status.includes("completed")
+  //       );
+  //       let ethCount = 0;
+  //       let ethValueAdded = 0;
+  //       for (let i = 0; i < ethcomplete.length; i++) {
+  //         const element = ethcomplete[i];
+  //         ethCount = element.amount;
+  //         ethValueAdded += ethCount;
+  //       }
+  //       setethBalance(ethValueAdded);
+  //       // tx
+  //       // tx
+  //       const usdt = userCoins.getCoin.transactions.filter((transaction) =>
+  //         transaction.trxName.includes("tether")
+  //       );
+  //       const usdtcomplete = usdt.filter((transaction) =>
+  //         transaction.status.includes("completed")
+  //       );
+  //       let usdtCount = 0;
+  //       let usdtValueAdded = 0;
+  //       for (let i = 0; i < usdtcomplete.length; i++) {
+  //         const element = usdtcomplete[i];
+  //         usdtCount = element.amount;
+  //         usdtValueAdded += usdtCount;
+  //       }
+  //       setusdtBalance(usdtValueAdded);
+  //       // tx
 
-        const totalValue = (
-          btcValueAdded * liveBtc +
-          ethValueAdded * 2241.86 +
-          usdtValueAdded
-        ).toFixed(2);
+  //       const totalValue = (
+  //         btcValueAdded * liveBtc +
+  //         ethValueAdded * 2241.86 +
+  //         usdtValueAdded
+  //       ).toFixed(2);
 
-        //
-        const [integerPart, fractionalPart] = totalValue.split(".");
+  //       //
+  //       const [integerPart, fractionalPart] = totalValue.split(".");
 
-        const formattedTotalValue = parseFloat(integerPart).toLocaleString(
-          "en-US",
-          {
-            style: "currency",
-            currency: "USD",
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0,
-          }
-        );
+  //       const formattedTotalValue = parseFloat(integerPart).toLocaleString(
+  //         "en-US",
+  //         {
+  //           style: "currency",
+  //           currency: "USD",
+  //           minimumFractionDigits: 0,
+  //           maximumFractionDigits: 0,
+  //         }
+  //       );
 
-        //
-        setfractionBalance(fractionalPart);
-        return;
-      } else {
-        toast.dismiss();
-        toast.error(userCoins.msg);
-      }
-    } catch (error) {
-      toast.dismiss();
-      toast.error(error);
-    } finally {
-    }
-  };
+  //       //
+  //       setfractionBalance(fractionalPart);
+  //       return;
+  //     } else {
+  //       toast.dismiss();
+  //       toast.error(userCoins.msg);
+  //     }
+  //   } catch (error) {
+  //     toast.dismiss();
+  //     toast.error(error);
+  //   } finally {
+  //   }
+  // };
   //
   return (
     <div className="dark user-bg">
