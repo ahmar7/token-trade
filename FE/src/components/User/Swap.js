@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useAuthUser } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
 import UserHeader from "./UserHeader";
+import "./style.css";
 const Swap = () => {
   const [Active, setActive] = useState(false);
   let toggleBar = () => {
@@ -14,6 +15,7 @@ const Swap = () => {
       setActive(true);
     }
   };
+  const [UserData, setUserData] = useState(true);
 
   const authUser = useAuthUser();
   const Navigate = useNavigate();
@@ -29,6 +31,111 @@ const Swap = () => {
       return;
     }
   }, []);
+  //
+  //
+
+  const [isLoading, setisLoading] = useState(true);
+
+  const [liveBtc, setliveBtc] = useState(null);
+  const [btcBalance, setbtcBalance] = useState(0);
+
+  const getCoins = async (data) => {
+    let id = data._id;
+    try {
+      const response = await axios.get(
+        "https://api.coindesk.com/v1/bpi/currentprice.json"
+      );
+      const userCoins = await getCoinsUserApi(id);
+
+      if (response && userCoins.success) {
+        setUserData(userCoins.getCoin);
+        // setUserTransactions;
+        let val = response.data.bpi.USD.rate.replace(/,/g, "");
+        console.log("val: ", val);
+        setliveBtc(val);
+        setisLoading(false);
+        // tx
+        const btc = userCoins.getCoin.transactions.filter((transaction) =>
+          transaction.trxName.includes("bitcoin")
+        );
+        const btccomplete = btc.filter((transaction) =>
+          transaction.status.includes("completed")
+        );
+        let btcCount = 0;
+        let btcValueAdded = 0;
+        for (let i = 0; i < btccomplete.length; i++) {
+          const element = btccomplete[i];
+          btcCount = element.amount;
+          btcValueAdded += btcCount;
+        }
+        setbtcBalance(btcValueAdded);
+        // tx
+        // tx
+        const eth = userCoins.getCoin.transactions.filter((transaction) =>
+          transaction.trxName.includes("ethereum")
+        );
+        const ethcomplete = eth.filter((transaction) =>
+          transaction.status.includes("completed")
+        );
+        let ethCount = 0;
+        let ethValueAdded = 0;
+        for (let i = 0; i < ethcomplete.length; i++) {
+          const element = ethcomplete[i];
+          ethCount = element.amount;
+          ethValueAdded += ethCount;
+        }
+        setethBalance(ethValueAdded);
+        // tx
+        // tx
+        const usdt = userCoins.getCoin.transactions.filter((transaction) =>
+          transaction.trxName.includes("tether")
+        );
+        const usdtcomplete = usdt.filter((transaction) =>
+          transaction.status.includes("completed")
+        );
+        let usdtCount = 0;
+        let usdtValueAdded = 0;
+        for (let i = 0; i < usdtcomplete.length; i++) {
+          const element = usdtcomplete[i];
+          usdtCount = element.amount;
+          usdtValueAdded += usdtCount;
+        }
+        setusdtBalance(usdtValueAdded);
+        // tx
+
+        const totalValue = (
+          btcValueAdded * liveBtc +
+          ethValueAdded * 2241.86 +
+          usdtValueAdded
+        ).toFixed(2);
+
+        //
+        const [integerPart, fractionalPart] = totalValue.split(".");
+
+        const formattedTotalValue = parseFloat(integerPart).toLocaleString(
+          "en-US",
+          {
+            style: "currency",
+            currency: "USD",
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          }
+        );
+
+        //
+        setfractionBalance(fractionalPart);
+        return;
+      } else {
+        toast.dismiss();
+        toast.error(userCoins.msg);
+      }
+    } catch (error) {
+      toast.dismiss();
+      toast.error(error);
+    } finally {
+    }
+  };
+  //
   return (
     <div className="dark user-bg">
       <div>
@@ -46,178 +153,65 @@ const Swap = () => {
             </div>
           </button>
           <div className="relative min-h-screen w-full fall overflow-x-hidden pe-4 transition-all duration-300 xl:px-10 lg:max-w-[calc(100%_-_250px)] lg:ms-[250px]">
-            <div
-              className="styles__Row-sc-gdoee2-3 cHzJyq main-page__exchange-form"
-              bis_skin_checked={1}
-            >
-              <h1 className="styles__Title-sc-gdoee2-4 hPKzUi">
-                Crypto Exchange
-              </h1>
-              <p className="styles__SubTitle-sc-gdoee2-5 cjggAc">
-                Free from sign-up, limits, complications
-              </p>
-              <div
-                className="styles__Layout-sc-1nylueb-0 hhzarz"
-                bis_skin_checked={1}
-              >
-                <div
-                  className="styles__Layout-sc-y0viyd-0 MbtXp main-form"
-                  bis_skin_checked={1}
-                >
-                  <div
-                    className="styles__Tab-sc-1gnwpkl-0 gcuZFM main-page__tabs"
-                    bis_skin_checked={1}
+            <div className="col-xxl-3 col-xl-6" bis_skin_checked={1}>
+              <div className="card card-f" bis_skin_checked={1}>
+                <div className="card-header" bis_skin_checked={1}>
+                  <h4 className="card-title">Convert </h4>
+                </div>
+                <div className="card-body" bis_skin_checked={1}>
+                  <form
+                    method="post"
+                    name="myform"
+                    className="currency_validate trade-form row g-3"
                   >
-                    <div
-                      className="styles__TabLeft-sc-1gnwpkl-1 hIXdPM main-page__tab-crypto"
-                      bis_skin_checked={1}
-                    >
-                      <span>Crypto Exchange</span>
-                    </div>
-                    <div
-                      className="styles__TabRight-sc-1gnwpkl-2 bDjdNq main-page__tab-fiat"
-                      bis_skin_checked={1}
-                    >
-                      <span>Buy/Sell Crypto</span>
-                    </div>
-                  </div>
-                  <div
-                    className="styles__Main-sc-pjjdwd-0 bNkCSW"
-                    bis_skin_checked={1}
-                  >
-                    <div
-                      className="styles__Row-sc-yro9np-0 dyUeOw main-page__exchange-group main-page__exchange-from"
-                      bis_skin_checked={1}
-                    >
-                      <div
-                        className="styles__InputGroup-sc-yro9np-2 gocmbd"
-                        bis_skin_checked={1}
-                      >
-                        <label
-                          htmlFor="exchange_form_from_field"
-                          className="styles__InputLabel-sc-yro9np-1 bGyWBM"
-                        >
-                          You send
-                        </label>
+                    <div className="col-12" bis_skin_checked={1}>
+                      <label className="form-label">From</label>
+                      <div className="input-group" bis_skin_checked={1}>
+                        <select className="form-control" name="method">
+                          <option value="bank">USDT</option>
+                          <option value="master">ETH</option>
+                          <option value="master">BTC</option>
+                        </select>
                         <input
-                          inputMode="decimal"
-                          id="exchange_form_from_field"
-                          className="styles__Input-sc-yro9np-3 hoYCOf"
                           type="text"
-                          defaultValue="0.1"
-                        />
-                      </div>
-                      <div
-                        className="styles__DropdownGroup-sc-yro9np-8 fiMYjp"
-                        bis_skin_checked={1}
-                      >
-                        <div
-                          className="styles__DropdownTickerIcon-sc-yro9np-9 jqzPyT"
-                          bis_skin_checked={1}
-                        >
-                          <img
-                            alt="btc"
-                            src="https://static.simpleswap.io/images/currencies-logo/btc.svg"
-                            className="styles__StyledImage-sc-7mvgp0-0 fayLXv"
-                          />
-                        </div>
-                        <span className="styles__DropdownTickerName-sc-yro9np-10 fA-DWNq">
-                          BTC
-                        </span>
-                        <div
-                          className="styles__DropdownArrow-sc-yro9np-7 dSwoFE"
-                          bis_skin_checked={1}
+                          name="currency_amount"
+                          className="form-control"
+                          placeholder="0.0214 BTC"
                         />
                       </div>
                     </div>
-                    <div
-                      className="styles__Controls-sc-rj1sl4-0 iKJQUd"
-                      bis_skin_checked={1}
+                    <div className="col-12" bis_skin_checked={1}>
+                      <label className="form-label">To</label>
+                      <div className="input-group" bis_skin_checked={1}>
+                        <select className="form-control" name="method">
+                          <option value="bank">USDT</option>
+                          <option value="master">ETH</option>
+                          <option value="master">BTC</option>
+                        </select>
+                        <input
+                          type="text"
+                          name="currency_amount"
+                          className="form-control"
+                          placeholder="0.0214 BTC"
+                        />
+                      </div>
+                    </div>
+                    <p className="mb-0">
+                      1 USD ~ 0.000088 BTC{" "}
+                      <a href="#">
+                        Expected rate <br />
+                        No extra fees
+                      </a>
+                    </p>
+                    <button
+                      type="button"
+                      className="btn btn-success btn-block"
+                      data-toggle="modal"
+                      data-target="#convertModal"
                     >
-                      <div
-                        className="styles__FloatingRow-sc-rj1sl4-3 cODnKT"
-                        bis_skin_checked={1}
-                      >
-                        <div
-                          className="styles__FloatingButton-sc-rj1sl4-1 fPJbUv"
-                          bis_skin_checked={1}
-                        >
-                          <div
-                            className="styles__FloatingIcon-sc-rj1sl4-2 bBvjxI main-exchange__floating-icon"
-                            bis_skin_checked={1}
-                          />
-                        </div>
-                        <div
-                          className="styles__FloatingText-sc-rj1sl4-4 wmIOX"
-                          bis_skin_checked={1}
-                        >
-                          Floating rate
-                        </div>
-                      </div>
-                      <div
-                        className="styles__SwapRow-sc-rj1sl4-15 gkyJyG"
-                        bis_skin_checked={1}
-                      >
-                        <div
-                          className="styles__SwapIcon-sc-rj1sl4-14 fbyucl"
-                          bis_skin_checked={1}
-                        />
-                      </div>
-                    </div>
-                    <div
-                      className="styles__Row-sc-yro9np-0 dyUeOw main-page__exchange-group main-page__exchange-to"
-                      bis_skin_checked={1}
-                    >
-                      <div
-                        className="styles__InputGroup-sc-yro9np-2 EBloy"
-                        bis_skin_checked={1}
-                      >
-                        <label
-                          htmlFor="exchange_form_to_field"
-                          className="styles__InputLabel-sc-yro9np-1 bGyWBM"
-                        >
-                          You get
-                        </label>
-                        <div
-                          className="styles__InputTo-sc-yro9np-5 bwuFSW"
-                          bis_skin_checked={1}
-                        >
-                          <div
-                            className="styles__InputToTilda-sc-yro9np-6 gZEATK"
-                            bis_skin_checked={1}
-                          />
-                          <span className="styles__InputText-sc-yro9np-4 hmwndh">
-                            2.01742451
-                          </span>
-                        </div>
-                      </div>
-                      <div
-                        className="styles__DropdownGroup-sc-yro9np-8 fiMYjp"
-                        bis_skin_checked={1}
-                      >
-                        <div
-                          className="styles__DropdownTickerIcon-sc-yro9np-9 jqzPyT"
-                          bis_skin_checked={1}
-                        >
-                          <img
-                            alt="eth"
-                            src="https://static.simpleswap.io/images/currencies-logo/eth.svg"
-                            className="styles__StyledImage-sc-7mvgp0-0 fayLXv"
-                          />
-                        </div>
-                        <span className="styles__DropdownTickerName-sc-yro9np-10 fA-DWNq">
-                          ETH
-                        </span>
-                        <div
-                          className="styles__DropdownArrow-sc-yro9np-7 dSwoFE"
-                          bis_skin_checked={1}
-                        />
-                      </div>
-                    </div>
-                    <button className="styles__Button-sc-pjjdwd-1 gngNIH">
-                      Exchange
+                      Convert Now
                     </button>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
