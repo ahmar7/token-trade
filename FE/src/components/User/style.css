@@ -65,7 +65,27 @@
   flex: none;
   width: 100px;
 }
+.dtr select,
+.dtr option {
+  cursor: pointer !important;
+}
+.add,
+.asd {
+  width: calc(100% - 100px) !important;
+  border-radius: 0 0.25rem 0.25rem 0 !important;
+}
+.spinner-border-sm.borer {
+  width: 2rem !important;
+  height: 2rem !important;
+  z-index: 9 !important;
+  border-width: 0.3em !important;
+  position: absolute !important;
+  border-radius: 66px !important;
+  left: 119px !important;
 
+  animation: spinner-border 2.75s linear infinite !important;
+  top: 9px !important;
+}
 .input-group > .form-control,
 .input-group > .form-select {
   position: relative;

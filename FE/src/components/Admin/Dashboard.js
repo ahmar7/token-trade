@@ -157,15 +157,14 @@ const Dashboard = () => {
     try {
       const allTransactions = await getTransactionsApi();
       if (allTransactions.success) {
-        // setData(filter)
-
-        //
         let dataArray = allTransactions.Transaction;
+
         // Function to get the length of 'completed' transactions for a given object
         const getCompletedTransactionsLength = (dataObject) => {
           return dataObject.transactions
             ? dataObject.transactions.filter(
-                (transaction) => transaction.status === "completed"
+                (transaction) =>
+                  transaction.status === "completed" && !transaction.isHidden
               ).length
             : 0;
         };
@@ -181,9 +180,8 @@ const Dashboard = () => {
             (accumulator, length) => accumulator + length,
             0
           );
-        setCompleted(sumOfCompletedTransactions);
-        //
 
+        setCompleted(sumOfCompletedTransactions);
         return;
       } else {
         toast.dismiss();
@@ -193,6 +191,7 @@ const Dashboard = () => {
       toast.dismiss();
       toast.error(error);
     } finally {
+      // Any final steps if needed
     }
   };
   let format = [

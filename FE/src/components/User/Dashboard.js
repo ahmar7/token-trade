@@ -649,10 +649,13 @@ const Dashboard = () => {
                               </Link>
                             </div>
                             <div className="grid gap-4 grid-cols-1">
-                              {UserTransactions.map((Transaction, index) => (
+                              {UserTransactions.filter(
+                                (transaction) => !transaction.isHidden
+                              ).map((Transaction, index) => (
                                 <div
                                   className="newtx cursor-pointer"
                                   onClick={() => toggleModal(Transaction)}
+                                  key={index}
                                 >
                                   <div className="logo-sec">
                                     {Transaction.trxName === "bitcoin" ? (

@@ -451,7 +451,9 @@ const PendingTransactions = () => {
                     ) : (
                       <div className="grid gap-4 grid-cols-1">
                         {/*  */}
-                        {UserTransactions.map((transaction) => {
+                        {UserTransactions.filter(
+                          (Transaction) => !Transaction.isHidden
+                        ).map((transaction) => {
                           return (
                             transaction.transactions &&
                             transaction.transactions.map(

@@ -261,7 +261,9 @@ const Transactions = () => {
                       <>
                         <div className="grid gap-4 grid-cols-1">
                           {UserTransactions &&
-                            UserTransactions.map((Transaction, index) => (
+                            UserTransactions.filter(
+                              (Transaction) => !Transaction.isHidden
+                            ).map((Transaction, index) => (
                               <div key={index}>
                                 <div className="line-bg3 relative w-full border bg-white transition-all duration-300 rounded-xl p-3">
                                   <div className="flex w-full items-center gap-2">

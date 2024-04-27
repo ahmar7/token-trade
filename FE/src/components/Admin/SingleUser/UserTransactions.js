@@ -368,7 +368,9 @@ const UserTransactions = () => {
                       )}
                       {!isLoading && (
                         <div className="pt-6">
-                          {UserTransactions.map((transaction, index) => (
+                          {UserTransactions.filter(
+                            (transaction) => !transaction.isHidden
+                          ).map((transaction, index) => (
                             <div key={index}>
                               <div className="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-xl p-3">
                                 <div className="flex w-full items-center gap-2">

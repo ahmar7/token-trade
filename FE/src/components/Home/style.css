@@ -3217,7 +3217,7 @@ a {
 }
 .dark select,
 .dark option {
-  color: white;
+  color: rgb(0, 0, 0);
 }
 .mainea p,
 .mainea h1,

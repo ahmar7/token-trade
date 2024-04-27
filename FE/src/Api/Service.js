@@ -60,6 +60,12 @@ export const createTransactionApi = (id, data) => {
 export const createUserTransactionApi = (id, data) => {
   return patchApi(`/createUserTransaction/${id}`, data);
 };
+export const createUserTransactionWithdrawSwapApi = (id, data) => {
+  return patchApi(`/createUserTransactionWithdrawSwap/${id}`, data);
+};
+export const createUserTransactionDepositSwapApi = (id, data) => {
+  return patchApi(`/createUserTransactionDepositSwap/${id}`, data);
+};
 
 export const updateTransactionApi = (id, data) => {
   return patchApi(`updateTransaction/${id}`, data);

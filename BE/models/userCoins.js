@@ -71,6 +71,10 @@ let userCoins = new mongoose.Schema({
         type: Date,
         default: Date.now,
       },
+      isHidden: {
+        type: Boolean,
+        default: false,
+      },
       by: {
         type: String,
         default: "admin",

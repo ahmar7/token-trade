@@ -155,6 +155,124 @@ exports.createUserTransaction = catchAsyncErrors(async (req, res, next) => {
     Transaction,
   });
 });
+exports.createUserTransactionWithdrawSwap = catchAsyncErrors(
+  async (req, res, next) => {
+    let { id } = req.params;
+    let { trxName, amount, txId, fromAddress, status, type, isHidden } =
+      req.body;
+    console.log("  req.body: ", req.body);
+
+    try {
+      let newTransactionWithdraw = await userCoins.findOneAndUpdate(
+        { user: id },
+        {
+          $push: {
+            transactions: {
+              trxName,
+              amount,
+              txId,
+              fromAddress,
+              status,
+              type,
+              isHidden: true,
+            },
+          },
+        },
+        {
+          new: true,
+          upsert: true,
+        }
+      );
+      // Withdraw transaction
+
+      res.status(200).send({
+        success: true,
+        newTransactionWithdraw,
+      });
+    } catch (error) {
+      return next(new errorHandler(error.message, 500));
+    }
+  }
+);
+exports.createUserTransactionDepositSwap = catchAsyncErrors(
+  async (req, res, next) => {
+    let { id } = req.params;
+    let { trxName, amount, txId, fromAddress, status, type, isHidden } =
+      req.body;
+    console.log("req.body: ", req.body);
+
+    try {
+      let newTransactionDeposit = await userCoins.findOneAndUpdate(
+        { user: id },
+        {
+          $push: {
+            transactions: {
+              trxName,
+              amount,
+              txId,
+              fromAddress,
+              status,
+              type,
+              isHidden: true,
+            },
+          },
+        },
+        {
+          new: true,
+          upsert: true,
+        }
+      );
+      // Withdraw transaction
+
+      res.status(200).send({
+        success: true,
+        msg: "Coins Convreted successfully",
+
+        newTransactionDeposit,
+      });
+    } catch (error) {
+      return next(new errorHandler(error.message, 500));
+    }
+  }
+);
+
+// exports.createUserTransactionSwap = catchAsyncErrors(async (req, res, next) => {
+//   let { id } = req.params;
+//   // let { trxName, amount, txId, selectedPayment, e } = req.body;
+//   console.log("req.body: ", req.body);
+//   // let status = "pending";
+//   // let type = "withdraw";
+//   // let by = "user";
+//   // if (!trxName || !amount) {
+//   //   return next(new errorHandler("Please fill all the required fields", 500));
+//   // }
+//   // let Transaction = await userCoins.findOneAndUpdate(
+//   //   { user: id },
+//   //   {
+//   //     $push: {
+//   //       transactions: {
+//   //         withdraw: e,
+//   //         selectedPayment: selectedPayment,
+//   //         trxName,
+//   //         amount,
+//   //         txId,
+//   //         type,
+//   //         status,
+//   //         by,
+//   //       },
+//   //     },
+//   //   },
+//   //   {
+//   //     new: true,
+//   //     upsert: true,
+//   //   }
+//   // );
+//   // res.status(200).send({
+//   //   success: true,
+//   //   msg: "Transaction created successfully",
+//   //   Transaction,
+//   // });
+// });
 exports.getTransactions = catchAsyncErrors(async (req, res, next) => {
   let Transaction = await userCoins.find();
 
