@@ -193,7 +193,6 @@ const Swap = () => {
         );
 
         //
-        setfractionBalance(fractionalPart);
         return;
       } else {
         toast.dismiss();
@@ -449,7 +448,6 @@ const Swap = () => {
       if (newTransactionDeposit.success) {
         toast.success(newTransactionDeposit.msg);
         Navigate("/assets");
-        closeDeposit();
       } else {
         console.log("neemdone");
 
