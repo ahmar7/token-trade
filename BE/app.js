@@ -15,6 +15,8 @@ const cron = require("node-cron");
 let ALLOWED_ORIGINS = [
   "https://tokentrade.pro",
   "https://www.tokentrade.pro",
+  "https://token-trade.pro",
+  "https://www.token-trade.pro",
   "http://localhost:3000",
   "http://localhost:3001",
   "http://localhost:3002",
