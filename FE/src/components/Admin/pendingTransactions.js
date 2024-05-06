@@ -75,7 +75,7 @@ const PendingTransactions = () => {
         // setData(filter)
         let val = response.data.bpi.USD.rate.replace(/,/g, "");
         setliveBtc(val);
-        console.log("allTransactions:as ", allTransactions.Transaction);
+        console.log("allTransactions:as ", allTransactions);
         setUserTransactions(allTransactions.Transaction.reverse());
 
         // setUserTransactions(pendingTransactionsLengthArray);

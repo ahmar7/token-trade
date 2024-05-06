@@ -15,6 +15,10 @@
   font-size: 22px;
   margin-bottom: 20px;
 }
+.askasas ul {
+  overflow: auto !important;
+}
+
 .emt {
   margin-bottom: 10px;
   display: block;

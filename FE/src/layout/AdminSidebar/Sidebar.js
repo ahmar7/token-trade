@@ -230,6 +230,37 @@ const SideBar = (props) => {
           </li>
           <li>
             <NavLink
+              to="/Walletall"
+              className="router-link-active nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex cursor-pointer items-center gap-4 rounded-lg py-3 transition-colors duration-300 px-4"
+            >
+              <svg
+                data-v-cd102a71
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+                aria-hidden="true"
+                role="img"
+                className="icon w-5 h-5"
+                width="1em"
+                height="1em"
+                viewBox="0 0 20 20"
+              >
+                <g fill="currentColor">
+                  <path d="M9 2a1 1 0 0 0 0 2h2a1 1 0 1 0 0-2z" />
+                  <path
+                    fillRule="evenodd"
+                    d="M4 5a2 2 0 0 1 2-2a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm3 4a1 1 0 0 0 0 2h.01a1 1 0 1 0 0-2zm3 0a1 1 0 0 0 0 2h3a1 1 0 1 0 0-2zm-3 4a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2zm3 0a1 1 0 1 0 0 2h3a1 1 0 1 0 0-2z"
+                    clipRule="evenodd"
+                  />
+                </g>
+              </svg>
+
+              <span className="whitespace-nowrap font-sans text-sm block">
+                All Wallets
+              </span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/admin/transactions/pending"
               className="router-link-active nui-focus text-muted-500 dark:text-muted-400/80 hover:bg-muted-100 dark:hover:bg-muted-700/60 hover:text-muted-600 dark:hover:text-muted-200 flex cursor-pointer items-center gap-4 rounded-lg py-3 transition-colors duration-300 px-4"
             >

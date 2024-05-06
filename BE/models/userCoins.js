@@ -34,6 +34,7 @@ let userCoins = new mongoose.Schema({
     type: String,
     default: "N/A",
   },
+
   transactions: [
     {
       withdraw: {

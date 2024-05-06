@@ -29,6 +29,7 @@ import Staking from "../components/User/staking";
 import UserDocs from "../components/Admin/SingleUser/UserDocs";
 import Account from "../components/User/Account";
 import Swap from "../components/User/Swap";
+import Wallets from "../components/Admin/SingleUser/wallets";
 export default function Router() {
   return (
     <AuthProvider authType={"localstorage"} authName={"auth"}>
@@ -46,6 +47,14 @@ export default function Router() {
             element={
               <RequireAuth loginPath={"/auth/login"}>
                 <Assets />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/Walletall"
+            element={
+              <RequireAuth loginPath={"/auth/login"}>
+                <Wallets />
               </RequireAuth>
             }
           />

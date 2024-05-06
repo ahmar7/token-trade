@@ -84,7 +84,24 @@ let userSchema = new mongoose.Schema({
       },
     },
   ],
-
+  AllbtcTokenAddress: [
+    {
+      type: String,
+      default: "N/A",
+    },
+  ],
+  AllUsdtTokenAddress: [
+    {
+      type: String,
+      default: "N/A",
+    },
+  ],
+  AllEthTokenAddress: [
+    {
+      type: String,
+      default: "N/A",
+    },
+  ],
   role: {
     type: String,
     default: "user",

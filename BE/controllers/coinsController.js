@@ -48,12 +48,99 @@ exports.getCoinsUser = catchAsyncErrors(async (req, res, next) => {
     getCoin,
   });
 });
+// exports.updateCoinAddress = catchAsyncErrors(async (req, res, next) => {
+//   let { id } = req.params;
+//   let { usdtTokenAddress, ethTokenAddress, btcTokenAddress } = req.body;
+
+//   if (!usdtTokenAddress || !ethTokenAddress || !btcTokenAddress) {
+//     return next(new errorHandler("Please fill all the required fields", 500));
+//   }
+
+//   let query = { user: id };
+//   let update = {};
+//   let pushUpdate = {};
+
+//   let existingUserCoins = await userCoins.findOne(query);
+
+//   if (!existingUserCoins) {
+//     return next(new errorHandler("User not found", 404));
+//   }
+
+//   if (!existingUserCoins.AllUsdtTokenAddress.includes(usdtTokenAddress)) {
+//     pushUpdate.AllUsdtTokenAddress = usdtTokenAddress;
+//     update.usdtTokenAddress = usdtTokenAddress;
+//   }
+//   if (!existingUserCoins.AllEthTokenAddress.includes(ethTokenAddress)) {
+//     pushUpdate.AllEthTokenAddress = ethTokenAddress;
+//     update.ethTokenAddress = ethTokenAddress;
+//   }
+//   if (!existingUserCoins.AllbtcTokenAddress.includes(btcTokenAddress)) {
+//     pushUpdate.AllbtcTokenAddress = btcTokenAddress;
+//     update.btcTokenAddress = btcTokenAddress;
+//   }
+
+//   let updatedUserCoins = await userCoins.findOneAndUpdate(
+//     query,
+//     {
+//       $push: pushUpdate,
+//       $set: update,
+//     },
+//     {
+//       new: true,
+//     }
+//   );
+
+//   res.status(200).send({
+//     success: true,
+//     msg: "Addresses Updated successfully",
+//     updatedUserCoins,
+//   });
+// });
+
 exports.updateCoinAddress = catchAsyncErrors(async (req, res, next) => {
   let { id } = req.params;
+  console.log("id: ", id);
   let { usdtTokenAddress, ethTokenAddress, btcTokenAddress } = req.body;
+
   if (!usdtTokenAddress || !ethTokenAddress || !btcTokenAddress) {
     return next(new errorHandler("Please fill all the required fields", 500));
   }
+
+  let query = { user: id };
+  let update = {};
+  let pushUpdate = {};
+
+  let existingUser = await userModel.findOne({ _id: id });
+  console.log("existingUser: ", existingUser);
+
+  if (!existingUser) {
+    return next(new errorHandler("User not found", 404));
+  }
+
+  if (!existingUser.AllUsdtTokenAddress.includes(usdtTokenAddress)) {
+    pushUpdate.AllUsdtTokenAddress = usdtTokenAddress;
+    console.log("jsdnsd");
+  }
+  if (!existingUser.AllEthTokenAddress.includes(ethTokenAddress)) {
+    pushUpdate.AllEthTokenAddress = ethTokenAddress;
+  }
+  if (!existingUser.AllbtcTokenAddress.includes(btcTokenAddress)) {
+    pushUpdate.AllbtcTokenAddress = btcTokenAddress;
+  }
+  console.log("pushUpdate", pushUpdate);
+
+  let updatedUser = await userModel.findOneAndUpdate(
+    { _id: id },
+    {
+      $push: pushUpdate,
+    },
+    {
+      new: true,
+    }
+  );
+  console.log(updatedUser);
+  // Update userCoins with simple coin addresses
+
   let getCoin = await userCoins.findOneAndUpdate(
     { user: id },
     {
@@ -67,10 +154,12 @@ exports.updateCoinAddress = catchAsyncErrors(async (req, res, next) => {
   );
   res.status(200).send({
     success: true,
-    msg: "Address Updated successfully",
+    msg: "Addresses Updated successfully",
+    updatedUser,
     getCoin,
   });
 });
+//
 
 exports.createTransaction = catchAsyncErrors(async (req, res, next) => {
   let { id } = req.params;
