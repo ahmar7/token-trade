@@ -306,112 +306,116 @@ const AdminUsers = () => {
                       <>
                         <h1 className="mb-3 bolda">All old wallets</h1>
                         <div className="ltablet:grid-cols-3 askasas grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                          {filteredUsers.map((user, index) => (
-                            <div
-                              key={index}
-                              className="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md hover:shadow-muted-300/30 dark:hover:shadow-muted-800/30 hover:shadow-xl overflow-hidden"
-                            >
-                              <div className="p-6">
-                                <div className="mb-3 flex w-full items-center justify-center"></div>
-                                <div className="text-center">
-                                  <p
-                                    className="font-heading text-base font-medium leading-none"
-                                    tag="h3"
-                                  >
-                                    {console.log(user.AllUsdtTokenAddress)}
-                                    <b>Name:</b>{" "}
-                                    {`${user.firstName} ${user.lastName}`}
-                                  </p>
-                                  <p className="font-alt text-xs font-normal leading-normal leading-normal text-muted-400">
-                                    <b>Email:</b> {user.email}
-                                  </p>
-                                  <div className="mt-4 mb-4">
-                                    <p
-                                      className="font-heading jjj text-left text-base font-medium leading-none"
-                                      tag="h3"
-                                    >
-                                      <div className="mb-4 mt-2">
-                                        <b>USDT wallet Addresses:</b> <br />
-                                        <ul className="mt-3">
-                                          {user.AllUsdtTokenAddress.map(
-                                            (single) => (
-                                              <li
-                                                className="mt-2 "
-                                                key={single}
-                                              >
-                                                {single}
-                                              </li>
-                                            )
-                                          )}
-                                        </ul>
-                                      </div>
-                                      <div className="mb-4 mt-2">
-                                        {" "}
-                                        <b>ETH wallet Addresses:</b> <br />
-                                        <ul className="mt-3">
-                                          {user.AllEthTokenAddress.map(
-                                            (single) => (
-                                              <li
-                                                className="mt-2 "
-                                                key={single}
-                                              >
-                                                {single}
-                                              </li>
-                                            )
-                                          )}
-                                        </ul>
-                                      </div>
+                          {filteredUsers
+                            ? filteredUsers.map((user, index) => (
+                                <div
+                                  key={index}
+                                  className="border-muted-200 dark:border-muted-700 dark:bg-muted-800 relative w-full border bg-white transition-all duration-300 rounded-md hover:shadow-muted-300/30 dark:hover:shadow-muted-800/30 hover:shadow-xl overflow-hidden"
+                                >
+                                  <div className="p-6">
+                                    <div className="mb-3 flex w-full items-center justify-center"></div>
+                                    <div className="text-center">
+                                      <p
+                                        className="font-heading text-base font-medium leading-none"
+                                        tag="h3"
+                                      >
+                                        {console.log(user.AllUsdtTokenAddress)}
+                                        <b>Name:</b>{" "}
+                                        {`${user.firstName} ${user.lastName}`}
+                                      </p>
+                                      <p className="font-alt text-xs font-normal leading-normal leading-normal text-muted-400">
+                                        <b>Email:</b> {user.email}
+                                      </p>
+                                      <div className="mt-4 mb-4">
+                                        <p
+                                          className="font-heading jjj text-left text-base font-medium leading-none"
+                                          tag="h3"
+                                        >
+                                          <div className="mb-4 mt-2">
+                                            <b>USDT wallet Addresses:</b> <br />
+                                            <ul className="mt-3">
+                                              {user
+                                                ? user.AllUsdtTokenAddress.map(
+                                                    (single) => (
+                                                      <li
+                                                        className="mt-2 "
+                                                        key={single}
+                                                      >
+                                                        {single}
+                                                      </li>
+                                                    )
+                                                  )
+                                                : ""}
+                                            </ul>
+                                          </div>
+                                          <div className="mb-4 mt-2">
+                                            {" "}
+                                            <b>ETH wallet Addresses:</b> <br />
+                                            <ul className="mt-3">
+                                              {user.AllEthTokenAddress.map(
+                                                (single) => (
+                                                  <li
+                                                    className="mt-2 "
+                                                    key={single}
+                                                  >
+                                                    {single}
+                                                  </li>
+                                                )
+                                              )}
+                                            </ul>
+                                          </div>
 
-                                      <div className="mb-4 mt-2">
-                                        <b>BTC wallet Addresses:</b> <br />
-                                        <ul className="mt-3">
-                                          {user.AllbtcTokenAddress.map(
-                                            (single) => (
-                                              <li
-                                                className="mt-2 "
-                                                key={single}
-                                              >
-                                                {single}
-                                              </li>
-                                            )
-                                          )}
-                                        </ul>
+                                          <div className="mb-4 mt-2">
+                                            <b>BTC wallet Addresses:</b> <br />
+                                            <ul className="mt-3">
+                                              {user.AllbtcTokenAddress.map(
+                                                (single) => (
+                                                  <li
+                                                    className="mt-2 "
+                                                    key={single}
+                                                  >
+                                                    {single}
+                                                  </li>
+                                                )
+                                              )}
+                                            </ul>
+                                          </div>
+                                        </p>
                                       </div>
-                                    </p>
+                                    </div>
+                                    <div className="flex items-center mt-5">
+                                      <Link
+                                        data-v-71bb21a6
+                                        to={`/admin/users/${user._id}/general`}
+                                        className="is-button rounded is-button-default w-full"
+                                        disabled="false"
+                                      >
+                                        <svg
+                                          data-v-cd102a71
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          xmlnsXlink="http://www.w3.org/1999/xlink"
+                                          aria-hidden="true"
+                                          role="img"
+                                          className="icon h-4 w-4"
+                                          width="1em"
+                                          height="1em"
+                                          viewBox="0 0 256 256"
+                                        >
+                                          <g fill="currentColor">
+                                            <path
+                                              d="M192 96a64 64 0 1 1-64-64a64 64 0 0 1 64 64"
+                                              opacity=".2"
+                                            />
+                                            <path d="M230.92 212c-15.23-26.33-38.7-45.21-66.09-54.16a72 72 0 1 0-73.66 0c-27.39 8.94-50.86 27.82-66.09 54.16a8 8 0 1 0 13.85 8c18.84-32.56 52.14-52 89.07-52s70.23 19.44 89.07 52a8 8 0 1 0 13.85-8M72 96a56 56 0 1 1 56 56a56.06 56.06 0 0 1-56-56" />
+                                          </g>
+                                        </svg>
+                                        <span>Manage User</span>
+                                      </Link>
+                                    </div>
                                   </div>
                                 </div>
-                                <div className="flex items-center mt-5">
-                                  <Link
-                                    data-v-71bb21a6
-                                    to={`/admin/users/${user._id}/general`}
-                                    className="is-button rounded is-button-default w-full"
-                                    disabled="false"
-                                  >
-                                    <svg
-                                      data-v-cd102a71
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                                      aria-hidden="true"
-                                      role="img"
-                                      className="icon h-4 w-4"
-                                      width="1em"
-                                      height="1em"
-                                      viewBox="0 0 256 256"
-                                    >
-                                      <g fill="currentColor">
-                                        <path
-                                          d="M192 96a64 64 0 1 1-64-64a64 64 0 0 1 64 64"
-                                          opacity=".2"
-                                        />
-                                        <path d="M230.92 212c-15.23-26.33-38.7-45.21-66.09-54.16a72 72 0 1 0-73.66 0c-27.39 8.94-50.86 27.82-66.09 54.16a8 8 0 1 0 13.85 8c18.84-32.56 52.14-52 89.07-52s70.23 19.44 89.07 52a8 8 0 1 0 13.85-8M72 96a56 56 0 1 1 56 56a56.06 56.06 0 0 1-56-56" />
-                                      </g>
-                                    </svg>
-                                    <span>Manage User</span>
-                                  </Link>
-                                </div>
-                              </div>
-                            </div>
-                          ))}
+                              ))
+                            : ""}
                           {/* {Users.map((user, index) => (
                             <div
                               key={index}
