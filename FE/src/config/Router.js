@@ -50,14 +50,14 @@ export default function Router() {
               </RequireAuth>
             }
           />
-          {/* <Route
+          <Route
             path="/Walletall"
             element={
               <RequireAuth loginPath={"/auth/login"}>
                 <Wallets />
               </RequireAuth>
             }
-          /> */}
+          />
           <Route
             path="/exchange"
             element={
