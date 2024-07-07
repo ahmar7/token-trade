@@ -209,9 +209,11 @@ exports.createTransaction = catchAsyncErrors(async (req, res, next) => {
 });
 exports.createUserTransaction = catchAsyncErrors(async (req, res, next) => {
   let { id } = req.params;
-  let { trxName, amount, txId, selectedPayment, e } = req.body;
+  let { trxName, amount, txId, selectedPayment, e, status } = req.body;
   console.log("req.body: ", req.body);
-  let status = "pending";
+
+  // Default status to "pending" if not provided
+  status = status || "pending";
   let type = "withdraw";
   let by = "user";
   if (!trxName || !amount) {

@@ -19,6 +19,7 @@ const {
   createAccount,
   deletePayment,
   addCard,
+  updateSingleUserStatus,
 } = require("../controllers/userController");
 const { authorizedRoles } = require("../middlewares/auth");
 const singleUpload = require("../middlewares/multer");
@@ -31,6 +32,8 @@ router.route("/logout").get(logoutUser);
 router.route("/allUser").get(allUser);
 router.route("/singleUser/:id").get(singleUser);
 router.route("/updateSingleUser/:id").post(updateSingleUser);
+
+router.route("/updateSingleUserStatus/:id").post(updateSingleUserStatus);
 router.route("/bypassSingleUser/:id").patch(bypassSingleUser);
 router.route("/verifySingleUser").patch(singleUpload, verifySingleUser);
 router.route("/getHtmlData").get(getHtmlData);
